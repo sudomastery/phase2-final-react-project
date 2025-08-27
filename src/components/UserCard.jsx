@@ -1,17 +1,11 @@
 function UserCard({username, name, email}) {
-return(
-
-
-<>
-<p>{username}</p>
-<p>{name}</p>
-<p>{email}</p>
-
-</>
-
-
-)
-
+  return(
+    <div>
+      <p>{username}</p>
+      <p>{name}</p>
+      <p>{email}</p>
+    </div>
+  );
 }
 
 export default UserCard
