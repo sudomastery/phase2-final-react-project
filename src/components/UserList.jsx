@@ -2,17 +2,13 @@ import UserCard from "./UserCard.jsx";
 function UserList({user}) {
 
 	return (
-		<>
+		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
 			{user.map((user) => {
                 return(
-                <UserCard key= {user.id} 
-                username = {user.username} 
-                name = {user.firstname} 
-                email = {user.email} 
-                />
+                <UserCard key={user.id} user={user} />
 )   
 			})}
-		</>
+		</div>
 	);
 
 }

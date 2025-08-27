@@ -11,7 +11,15 @@ function UserFetch() {
 
     
     
-    if (loading) return <img src="./public/images/loading.gif" style={{width: '50px', height: '50px'}}alt="Loading..." />;
+    if (loading) return (
+        <div className="flex items-center justify-center min-h-screen">
+            <img 
+                className="loading-img"
+                src="./public/images/loading.gif" 
+                alt="Loading..." 
+            />
+        </div>
+    );
     if (error) return <div>Error: {error}</div>;
 
     return(
@@ -22,7 +30,6 @@ function UserFetch() {
 </>
 
     )
-    
 
 }
 
