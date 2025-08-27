@@ -11,13 +11,13 @@ function App() {
   return (
     <>
       <UserFetch />
-      {/* <BrowserRouter>
+      <BrowserRouter>
       <Routes>
         <Route path="/" element={<UserFetch />} />
-        <Router path= "/user/:id" element={<UserDetail />}/>
+        <Route path= "/user/:id" element={<UserDetail />}/>
       </Routes>
       
-      </BrowserRouter> */}
+      </BrowserRouter>
 
      
     </>
