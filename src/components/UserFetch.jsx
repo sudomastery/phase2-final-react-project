@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import userFetchStore from "../store/userFetchStore.jsx";
+import UserList from "./UserList.jsx";
 
 function UserFetch() {
     const { user, loading, error, fetchData } = userFetchStore();
@@ -15,20 +16,15 @@ function UserFetch() {
 
     return(
 <>
-<h1>User List</h1>
-<ul>
-{user.map((user) => (
-    <li key={user.id}>{user.name.firstname}</li>
-))}
 
 
-
-</ul>
-
+<UserList user={user}/>
 </>
 
     )
+    
 
 }
+
 
 export default UserFetch;
