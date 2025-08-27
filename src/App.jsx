@@ -1,26 +1,16 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import UserFetch from './components/UserFetch'
-import UserCard from './components/UserCard'
-import { Button } from "flowbite-react";
-import { BrowserRouter } from 'react-router-dom'
+import UserDetail from './components/UserDetail'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 function App() {
   return (
-    <>
-      <UserFetch />
-      <BrowserRouter>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<UserFetch />} />
-        <Route path= "/user/:id" element={<UserDetail />}/>
+        <Route path="/user/:id" element={<UserDetail />} />
       </Routes>
-      
-      </BrowserRouter>
-
-     
-    </>
+    </BrowserRouter>
   )
 }
 
