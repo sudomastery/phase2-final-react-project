@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import userFetchStore from "../store/userFetchStore.jsx";
 
-function UserFetchComponent() {
+function UserFetch() {
     const { user, loading, error, fetchData } = userFetchStore();
     
     useEffect(() => {
@@ -9,7 +9,8 @@ function UserFetchComponent() {
     }, [fetchData]);
 
     
-    if (loading) return <div>Loading...</div>;
+    
+    if (loading) return <img src="./public/images/loading.gif" style={{width: '50px', height: '50px'}}alt="Loading..." />;
     if (error) return <div>Error: {error}</div>;
 
     return(
@@ -20,16 +21,14 @@ function UserFetchComponent() {
     <li key={user.id}>{user.name.firstname}</li>
 ))}
 
+
+
 </ul>
 
-
 </>
-
-
-
 
     )
 
 }
 
-export default UserFetchComponent;
+export default UserFetch;
