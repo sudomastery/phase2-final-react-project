@@ -16,7 +16,7 @@ function UserCard({user}) {
           <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
             {user.name.firstname} {user.name.lastname}
           </h5>
-          <span className="text-sm text-gray-500 dark:text-gray-400">{user.username}</span>
+          <span className="text-sm text-gray-500 dark:text-gray-400">@{user.username}</span>
           <span className="text-sm text-gray-500 dark:text-gray-400">{user.email}</span>
         </div>
       </Card>
