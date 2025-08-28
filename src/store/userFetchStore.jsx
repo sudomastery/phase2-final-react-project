@@ -8,8 +8,8 @@ const userFetch = create((set) => ({
     error: null,
 
 
-    //fetch data from api
-    fetchData: async(apiUrl) => {
+    //action function to fetch data from api
+    async fetchData(apiUrl) {
         //set to update store state
         set({ loading:true, error:null})
 
@@ -25,10 +25,10 @@ const userFetch = create((set) => ({
                     console.error('Fetch error:', error);
                     set({error: error.message, loading:false})
                 }
-        }
+        },
 
-        //create user post function
-        createUser: async (newUser) => {
+        //action function to post create user post function
+        async createUser(newUser) {
             set({loading: true, error: null})
             try{
 
@@ -44,19 +44,56 @@ const userFetch = create((set) => ({
                     const createdUser = await response.json()
 
                 //create a random id for id
-
+                const randomId = Math.floor(Math.random() * 1000) + 1;
                 set(state => ({
-                    user: [...state.user, { ...createdUser, id:}]
+                    user: [...state.user, { ...createdUser, id: randomId }],
+                    loading: false
                 }))
+                return createdUser
 
-
-
+            } catch (error) {
+                console.error("Creating user failed", error)
+                set({error: error.message, loading: false})
+                throw error
 
             }
 
 
+        },
+
+        //function to update user
+        async updateUser(userId, updatedUser) {
+            set({loading: true, error: null})
+            try{
+                const response = await fetch(`https://fakestoreapi.com/users/${userId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(updatedUser)
+                })
+
+                if (!response.ok) throw new Error ('Failed to update user')
+                    const updatedUserData = await response.json()
+
+                set(state => ({
+                    user: state.user.map(user =>
+                        user.id === userId ? {...user, ...updatedUserData} : user
+                    ),
+                    loading: false
+
+                }))
+                return updatedUserData
+
+            } catch (error){
+                console.error('Updated user error', error)
+                set({error: error.message, loading: false})
+                throw error
+            }
+
         }
 
+        //ADD DELETE 
 
 
 
