@@ -1,15 +1,15 @@
 import { useEffect } from "react";
-import userFetchStore from "../store/userFetchStore.jsx";
+import userFetch from "../store/userFetchStore.jsx";
 import UserList from "./UserList.jsx";
 
 function UserFetch() {
-    const { user, loading, error, fetchData } = userFetchStore();
+    const { users, loading, error, fetchData } = userFetch();
     
     useEffect(() => {
         fetchData("https://fakestoreapi.com/users");
     }, [fetchData]);
 
-    
+  
     
     if (loading) return (
         <div className="flex items-center justify-center min-h-screen">
@@ -26,7 +26,7 @@ function UserFetch() {
 <>
 
 
-<UserList user={user}/>
+<UserList users={users}/>
 </>
 
     )

@@ -1,16 +1,34 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Card, Button } from 'flowbite-react';
-import userFetchStore from '../store/userFetchStore';
+import userFetch from '../store/userFetchStore';
 
 
 function UserDetail (){
 const { id } = useParams() // get the user id rom url
+const navigate = useNavigate();
 
 //set the state
-const { user: usersArray } = userFetchStore() 
+const { users: usersArray, deleteUser, loading: deleteLoading } = userFetch() 
 const [userDetail, setUserDetail] = useState(null)
 const [loading, setLoading] = useState(true)
+
+// handle user deletion
+const handleDelete = async () => {
+    const firstName = userDetail.name.firstname;
+    const lastName = userDetail.name.lastname;
+    
+    if (window.confirm(`Are you sure you want to delete ${firstName} ${lastName}?`)) {
+        try {
+            await deleteUser(userDetail.id);
+            console.log('User deleted successfully');
+            navigate('/'); // Redirect to home page after deletion
+        } catch (error) {
+            console.error('Failed to delete user:', error);
+            alert('Failed to delete user. Please try again.');
+        }
+    }
+};
 
 useEffect(() => {
     const fetchUserDetail = async () => {
@@ -23,7 +41,7 @@ useEffect(() => {
             return //stop
         }
 
-        //no in the store try to perform a fetch
+        //if not in the store try to perform a fetch
         try {
             const response = await fetch(`https://fakestoreapi.com/users/${id}`)
             const userData = await response.json()
@@ -37,7 +55,7 @@ useEffect(() => {
     if (id) fetchUserDetail()
 }, [id, usersArray])
 
-//SET TO LOADIN IMAGE ICON
+// loading icon
 if (loading) return (
     <div className="flex items-center justify-center min-h-screen">
         <img 
@@ -55,7 +73,7 @@ if (!userDetail) return (
     </div>
 )
 
-// ADD CSS HERE- Completed
+// useer card
 return( 
     <div className="min-h-screen p-6" style={{backgroundColor: '#242424'}}>
         <div className="max-w-2xl mx-auto">
@@ -109,6 +127,25 @@ return(
                                 </div>
                             </div>
                         )}
+                    </div>
+                    
+                    {/* delete and edit buttons*/}
+                    <div className="flex gap-3 mt-6">
+                        <Button 
+                            color="failure" 
+                            size="sm"
+                            onClick={handleDelete}
+                            disabled={deleteLoading}
+                            className="bg-red-600 hover:bg-red-700 text-white"
+                        >
+                            {deleteLoading ? 'Deleting...' : 'Delete'}
+                        </Button>
+                        
+                        <Link to={`/edit-user/${userDetail.id}`}>
+                            <Button color="blue" size="sm">
+                                Edit
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </Card>
