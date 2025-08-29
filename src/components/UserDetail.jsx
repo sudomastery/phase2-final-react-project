@@ -85,7 +85,7 @@ return(
                 </Link>
             </div>
             
-            <Card className="max-w-full hover:shadow-lg transition-shadow duration-200">
+            <Card className="max-w-full transition transform duration-200 hover:scale-105 hover:shadow-[0_12px_30px_rgba(59,130,246,0.35)] hover:ring-4 hover:ring-blue-400/30">
                 <div className="flex flex-col items-center pb-10">
                     <img
                         alt="Profile image"

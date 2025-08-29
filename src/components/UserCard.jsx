@@ -37,8 +37,8 @@ function UserCard({user}) {
 
   return(
     <div className="relative">
-      <Card 
-        className="max-w-sm w-full hover:shadow-lg transition-shadow duration-200 cursor-pointer"
+      <Card
+        className="max-w-sm w-full transition transform duration-200 hover:scale-105 hover:shadow-[0_12px_30px_rgba(59,130,246,0.35)] hover:ring-4 hover:ring-blue-400/30 cursor-pointer"
         onClick={handleCardClick}
       >
         <div className="flex flex-col items-center pb-10">
